@@ -1,5 +1,24 @@
 const director_general = require('../models');
 
+// Funcion para obtener los datos de un director general mediante el id_usuario
+exports.getDirectorGeneralByUserId = async (req, res) => {
+    const { id_usuario } = req.query;
+    try {
+        const directorGeneral = await director_general.sequelize.models.director_general.findOne({
+            where: {
+                id_usuario: id_usuario
+            }
+        });
+        if (directorGeneral !== null) {
+            return res.status(200).send(directorGeneral);
+        } else {
+            return res.status(404).send({ message: 'No se encontraron datos del director general' });
+        }
+    } catch (error) {
+        return res.status(500).send({ message: 'Error en el servidor', error: error});
+    }
+};
+
 // Funcion para obtener todos los datos de un director general
 exports.getDirectorGeneral = async (req, res) => {
     const { id_director_general } = req.query;
@@ -22,8 +41,7 @@ exports.getDirectorGeneral = async (req, res) => {
 // Funcion para crear un director general
 exports.createDirectorGeneral = async (req, res) => {
     const { 
-        username, 
-        password, 
+        id_usuario, 
         nombres, 
         apellidos, 
         cedula, 
@@ -38,8 +56,7 @@ exports.createDirectorGeneral = async (req, res) => {
     } = req.body;
     try {
         await director_general.sequelize.models.director_general.create({
-            username: username,
-            password: password,
+            id_usuario: id_usuario,
             nombres: nombres,
             apellidos: apellidos,
             cedula: cedula,
@@ -63,8 +80,7 @@ exports.createDirectorGeneral = async (req, res) => {
 exports.updateDirectorGeneral = async (req, res) => {
     const { 
         id_director_general, 
-        username, 
-        password, 
+        id_usuario, 
         nombres, 
         apellidos, 
         cedula, 
@@ -78,8 +94,7 @@ exports.updateDirectorGeneral = async (req, res) => {
     } = req.body;
     try {
         await director_general.sequelize.models.director_general.update({
-            username: username,
-            password: password,
+            id_usuario: id_usuario,
             nombres: nombres,
             apellidos: apellidos,
             cedula: cedula,

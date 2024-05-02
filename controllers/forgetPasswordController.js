@@ -1,16 +1,16 @@
-const director_general = require('../models');
+const usuarios = require('../models');
 
 // Función para cambiar la contraseña
 exports.forgetPassword = async (req, res) => {
     const { username, password } = req.body;
     try {
-        const directorGeneral = await director_general.sequelize.models.director_general.findOne({
+        const directorGeneral = await usuarios.sequelize.models.usuarios.findOne({
             where: {
                 username: username
             }
         });
         if (directorGeneral !== null) {
-            await director_general.sequelize.models.director_general.update({
+            await usuarios.sequelize.models.usuarios.update({
                 password: password
             }, {
                 where: {

@@ -38,14 +38,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
             defaultValue: null
         },
-        id_sector: {
-            type: DataTypes.INTEGER(10),
-            allowNull: false,
-            references: {
-                model: 'sector_empresas',
-                key: 'id_sector_empresa'
-            }
-        },
         id_director_general: {
             type: DataTypes.INTEGER(10),
             allowNull: false,
