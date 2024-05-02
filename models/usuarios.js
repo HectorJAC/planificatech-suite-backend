@@ -15,11 +15,16 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         tipo_usuario: {
-            type: DataTypes.INTEGER(10),
+            type: DataTypes.STRING(20),
             allowNull: false,
-        }
+        },
+        estado: {
+            type: DataTypes.STRING(20),
+            allowNull: false,
+            defaultValue: 'ACTIVO'
+        },
     },{
-        tableName: 'director_general',
+        tableName: 'usuarios',
         timestamps: false
     });
     return usuarios;

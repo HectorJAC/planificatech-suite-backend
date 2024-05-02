@@ -17,13 +17,17 @@ app.use('/login', loginRoutes);
 const forgetPasswordRoutes = require('./routers/forgetPassword.routes');
 app.use('/forget_password', forgetPasswordRoutes);
 
+// Usuarios
+const usuariosRoutes = require('./routers/usuarios.routes');
+app.use('/usuarios', usuariosRoutes);
+
 // Director General
 const directorGeneralRoutes = require('./routers/directorGeneral.routes');
 app.use('/director_general', directorGeneralRoutes);
 
-// Sectores empresas
-const sectorEmpresaRoutes = require('./routers/sectorEmpresa.routes');
-app.use('/sector_empresa', sectorEmpresaRoutes);
+// Gerentes
+const gerentesRoutes = require('./routers/gerentes.routes');
+app.use('/gerentes', gerentesRoutes);
 
 // Empresas
 const empresasRoutes = require('./routers/empresas.routes');

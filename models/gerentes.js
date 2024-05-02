@@ -6,13 +6,13 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement: true,
             allowNull: false,
         },
-        username: {
-            type: DataTypes.STRING(120),
+        id_usuario: {
+            type: DataTypes.INTEGER(10),
             allowNull: false,
-        },
-        password: {
-            type: DataTypes.STRING(120),
-            allowNull: false,
+            references: {
+                model: 'usuarios',
+                key: 'id_usuario'
+            }
         },
         cedula: {
             type: DataTypes.BIGINT(19),
