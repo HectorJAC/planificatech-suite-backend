@@ -1,26 +1,33 @@
 module.exports = (sequelize, DataTypes) => {
-    const sector_empresas = sequelize.define("sector_empresas", {
-        id_sector_empresa: {
+    const usuarios = sequelize.define('usuarios', {
+        id_usuario: {
             type: DataTypes.INTEGER(10),
             primaryKey: true,
             autoIncrement: true,
             allowNull: false,
         },
-        nombre_sector: {
+        username: {
             type: DataTypes.STRING(120),
             allowNull: false,
         },
-        descripcion_sector: {
-            type: DataTypes.STRING(255),
+        password: {
+            type: DataTypes.STRING(120),
+            allowNull: false,
+        },
+        tipo_usuario: {
+            type: DataTypes.STRING(20),
             allowNull: false,
         },
         estado: {
             type: DataTypes.STRING(20),
             allowNull: false,
             defaultValue: 'ACTIVO'
-        }
+        },
     },{
+        tableName: 'usuarios',
         timestamps: false
     });
-    return sector_empresas;
-};     
+    return usuarios;
+};
+
+
