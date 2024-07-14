@@ -27,7 +27,11 @@ exports.getDepartamentos = async (req, res) => {
                 id_empresa: id_empresa
             }
         });
-        return res.status(200).send(departamentosEmpresa);
+        if (departamentosEmpresa.length > 0) {
+            return res.status(200).send(departamentosEmpresa);
+        } else {
+            return res.status(404).send({ message: 'No se encontraron departamentos' });
+        }
     } catch (error) {
         return res.status(500).send({ message: 'Error en el servidor', error: error });
     }

@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(255),
             allowNull: false,
         },
+        fecha_creacion_nota: {
+            type: DataTypes.DATE,
+            allowNull: false,
+        },
         id_usuario: {
             type: DataTypes.INTEGER(10),
             allowNull: false,
@@ -21,6 +25,11 @@ module.exports = (sequelize, DataTypes) => {
                 model: 'usuarios',
                 key: 'id_usuario'
             }
+        },
+        estado: {
+            type: DataTypes.STRING(20),
+            allowNull: false,
+            defaultValue: 'ACTIVO'
         },
     },{
         tableName: 'notas',

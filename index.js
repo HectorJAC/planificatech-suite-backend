@@ -21,6 +21,10 @@ app.use('/forget_password', forgetPasswordRoutes);
 const usuariosRoutes = require('./routers/usuarios.routes');
 app.use('/usuarios', usuariosRoutes);
 
+// Notas
+const notasRoutes = require('./routers/notas.routes');
+app.use('/notas', notasRoutes);
+
 // Director General
 const directorGeneralRoutes = require('./routers/directorGeneral.routes');
 app.use('/director_general', directorGeneralRoutes);
