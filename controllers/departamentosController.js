@@ -36,3 +36,21 @@ exports.getDepartamentos = async (req, res) => {
         return res.status(500).send({ message: 'Error en el servidor', error: error });
     }
 };
+
+// Funcion para crear un nuevo departamento
+exports.createDepartament = async (req, res) => {
+    const { nombre_departamento, descripcion_departamento, presupuesto_asignado, id_gerente, id_empresa } = req.body;
+    try {
+        const nuevoDepartamento = await departamentos.sequelize.models.departamentos.create({
+            nombre_departamento: nombre_departamento,
+            descripcion_departamento: descripcion_departamento,
+            presupuesto_asignado: presupuesto_asignado,
+            id_gerente: id_gerente,
+            id_empresa: id_empresa,
+            estado: 'ACTIVO'
+        });
+        return res.status(201).send(nuevoDepartamento);
+    } catch (error) {
+        return res.status(500).send({ message: 'Error en el servidor', error: error });
+    }
+};

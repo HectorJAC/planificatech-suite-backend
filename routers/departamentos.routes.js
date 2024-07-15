@@ -8,4 +8,7 @@ router.get('/getEmpleadosPorDepartamento', departamentosController.getEmpleadosP
 // Ruta para obtener todos los departamentos de una empresa
 router.get('/getDepartamentos', departamentosController.getDepartamentos);
 
+// Ruta para crear un nuevo departamento
+router.post('/createDepartament', departamentosController.createDepartament);
+
 module.exports = router;
