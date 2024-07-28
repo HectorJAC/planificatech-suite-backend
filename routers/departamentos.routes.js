@@ -17,4 +17,13 @@ router.post('/createDepartment', departamentosController.createDepartment);
 // Ruta para inactivar un departamento
 router.put('/inactivateDepartment', departamentosController.inactivateDepartment);
 
+// Ruta para inactivar un departamento
+router.put('/activateDepartment', departamentosController.activateDepartment);
+
+// Ruta para obtener un solo departamento
+router.get('/getOneDepartment', departamentosController.getOneDepartment);
+
+// Ruta para actualizar un departamento
+router.put('/updateDepartment', departamentosController.updateDepartment);
+
 module.exports = router;
