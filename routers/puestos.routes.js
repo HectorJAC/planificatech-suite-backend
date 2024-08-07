@@ -14,4 +14,13 @@ router.post('/createPuesto', puestosController.createPuesto);
 // Ruta para obtener un puesto
 router.get('/getPuesto', puestosController.getPuesto);
 
+// Ruta para inactivar un puesto
+router.put('/inactivatePuesto', puestosController.inactivatePuesto);
+
+// Ruta para activar un puesto
+router.put('/activatePuesto', puestosController.activatePuesto);
+
+// Ruta para actualizar un puesto
+router.put('/updatePuesto', puestosController.updatePuesto);
+
 module.exports = router;

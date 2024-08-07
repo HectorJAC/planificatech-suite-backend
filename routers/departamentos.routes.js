@@ -8,4 +8,22 @@ router.get('/getEmpleadosPorDepartamento', departamentosController.getEmpleadosP
 // Ruta para obtener todos los departamentos de una empresa
 router.get('/getDepartamentos', departamentosController.getDepartamentos);
 
+// Ruta para obtener todos los departamentos inactivos de una empresa
+router.get('/getInactiveDepartamentos', departamentosController.getInactiveDepartamentos);
+
+// Ruta para crear un nuevo departamento
+router.post('/createDepartment', departamentosController.createDepartment);
+
+// Ruta para inactivar un departamento
+router.put('/inactivateDepartment', departamentosController.inactivateDepartment);
+
+// Ruta para inactivar un departamento
+router.put('/activateDepartment', departamentosController.activateDepartment);
+
+// Ruta para obtener un solo departamento
+router.get('/getOneDepartment', departamentosController.getOneDepartment);
+
+// Ruta para actualizar un departamento
+router.put('/updateDepartment', departamentosController.updateDepartment);
+
 module.exports = router;
