@@ -15,6 +15,22 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true,
             defaultValue: null
         },
+        id_usuario_creacion: {
+            type: DataTypes.INTEGER(10),
+            allowNull: false,
+            references: {
+                model: 'usuarios',
+                key: 'id_usuario'
+            }
+        },
+        id_usuario_actualizacion: {
+            type: DataTypes.INTEGER(10),
+            allowNull: true,
+            references: {
+                model: 'usuarios',
+                key: 'id_usuario'
+            }
+        },
         estado: {
             type: DataTypes.STRING(120),
             allowNull: false,

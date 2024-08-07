@@ -8,4 +8,7 @@ router.post('/createUser', usuariosController.createUser);
 // Ruta para obtener los datos de un usuario
 router.get('/getUser', usuariosController.getUser);
 
+// Ruta para obtener todos los usuarios
+router.get('/getAllUsers', usuariosController.getAllUsers);
+
 module.exports = router;

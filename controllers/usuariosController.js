@@ -37,3 +37,13 @@ exports.getUser = async (req, res) => {
         return res.status(500).send({ message: 'Error en el servidor', error: error });
     }
 };
+
+// Funcion para obtener todos los usuarios
+exports.getAllUsers = async (req, res) => {
+    try {
+        const usuariosData = await usuarios.sequelize.models.usuarios.findAll();
+        return res.status(200).send(usuariosData);
+    } catch (error) {
+        return res.status(500).send({ message: 'Error en el servidor', error: error });
+    }
+};

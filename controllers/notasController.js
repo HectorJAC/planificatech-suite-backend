@@ -46,3 +46,22 @@ exports.deleteNote = async (req, res) => {
         return res.status(500).send({ message: 'Error en el servidor', error: error});
     }
 };
+
+// Funcion para obtener una nota
+exports.getNote = async (req, res) => {
+    const { id_nota } = req.query;
+    try {
+        const nota = await notas.sequelize.models.notas.findOne({
+            where: {
+                id_nota: id_nota
+            }
+        });
+        if (nota !== null) {
+            return res.status(200).send(nota);
+        } else {
+            return res.status(404).send({ message: 'No se encontraron datos de la nota' });
+        }
+    } catch (error) {
+        return res.status(500).send({ message: 'Error en el servidor', error: error});
+    }
+};

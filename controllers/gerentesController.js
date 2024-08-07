@@ -100,3 +100,22 @@ exports.getGerentesByCompany = async (req, res) => {
         return res.status(500).send({ message: 'Error en el servidor', error: error });
     }
 };
+
+// Funcion para obtener los datos de un gerente mediante el id_gerente
+exports.getGerenteById = async (req, res) => {
+    const { id_gerente } = req.query;
+    try {
+        const gerente = await gerentes.sequelize.models.gerentes.findOne({
+            where: {
+                id_gerente: id_gerente
+            }
+        });
+        if (gerente !== null) {
+            return res.status(200).send(gerente);
+        } else {
+            return res.status(404).send({ message: 'No se encontraron datos del gerente' });
+        }
+    } catch (error) {
+        return res.status(500).send({ message: 'Error en el servidor', error: error});
+    }
+};

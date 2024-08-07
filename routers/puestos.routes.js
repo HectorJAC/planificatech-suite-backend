@@ -20,4 +20,7 @@ router.put('/inactivatePuesto', puestosController.inactivatePuesto);
 // Ruta para activar un puesto
 router.put('/activatePuesto', puestosController.activatePuesto);
 
+// Ruta para actualizar un puesto
+router.put('/updatePuesto', puestosController.updatePuesto);
+
 module.exports = router;

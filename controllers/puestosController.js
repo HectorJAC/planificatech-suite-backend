@@ -31,11 +31,12 @@ exports.getPuestosInactivos = async (req, res) => {
 
 // Funcion para crear un puesto
 exports.createPuesto = async (req, res) => {
-    const { nombre_puesto, descripcion_puesto } = req.body;
+    const { nombre_puesto, descripcion_puesto, id_usuario_creacion } = req.body;
     try {
         await puestos.sequelize.models.puestos.create({
             nombre_puesto: nombre_puesto,
             descripcion_puesto: descripcion_puesto,
+            id_usuario_creacion: id_usuario_creacion,
             estado: 'ACTIVO'
         });
         return res.status(201).send({ message: 'Puesto creado correctamente' });
@@ -84,7 +85,7 @@ exports.inactivatePuesto = async (req, res) => {
     }
 };
 
-// Funcion para activae un puesto
+// Funcion para activar un puesto
 exports.activatePuesto = async (req, res) => {
     const { id_puesto } = req.body;
     try {
@@ -99,6 +100,29 @@ exports.activatePuesto = async (req, res) => {
             return res.status(200).send({ message: 'Puesto inactivado correctamente', puesto: puestoActivado});
         } else {
             return res.status(404).send({ message: 'Error inactivando el puesto', puesto: puestoActivado});
+        }
+    } catch (error) {
+        return res.status(500).send({ message: 'Error en el servidor', error: error });
+    }
+};
+
+// Funcion para actualizar un puesto
+exports.updatePuesto = async (req, res) => {
+    const { id_puesto, nombre_puesto, descripcion_puesto, id_usuario_actualizacion } = req.body;
+    try {
+        const puestoActualizado = await puestos.sequelize.models.puestos.update({
+            nombre_puesto: nombre_puesto,
+            descripcion_puesto: descripcion_puesto,
+            id_usuario_actualizacion: id_usuario_actualizacion
+        }, {
+            where: {
+                id_puesto: id_puesto
+            }
+        });
+        if (puestoActualizado > 0) {
+            return res.status(200).send({ message: 'Puesto actualizado correctamente', puesto: puestoActualizado});
+        } else {
+            return res.status(404).send({ message: 'Error actualizando el puesto', puesto: puestoActualizado});
         }
     } catch (error) {
         return res.status(500).send({ message: 'Error en el servidor', error: error });

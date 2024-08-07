@@ -14,4 +14,7 @@ router.get('/getNotesByUser', notasController.getNotasByUser);
 // Ruta para eliminar una nota
 router.delete('/deleteNote', notasController.deleteNote);
 
+// Ruta para obtener una nota
+router.get('/getNote', notasController.getNote);
+
 module.exports = router;

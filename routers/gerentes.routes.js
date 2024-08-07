@@ -14,4 +14,7 @@ router.get('/getGerentesByCompany', gerentesController.getGerentesByCompany);
 // Ruta para crear un gerente
 router.post('/createGerente', gerentesController.createGerente);
 
+// Ruta para obtener los datos de un gerente mediante el id_gerente
+router.get('/getGerenteById', gerentesController.getGerenteById);
+
 module.exports = router;
