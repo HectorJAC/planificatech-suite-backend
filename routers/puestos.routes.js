@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const puestosController = require('../controllers/puestosController');
 
+// Ruta para obtener la cantidad de empleados por puesto
+router.get('/getEmpleadosPorPuesto', puestosController.getEmpleadosPorPuesto);
+
 // Ruta para obtener todos los puestos activos
 router.get('/getPuestos', puestosController.getPuestos);
 

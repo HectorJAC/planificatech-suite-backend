@@ -26,4 +26,7 @@ router.get('/getOneDepartment', departamentosController.getOneDepartment);
 // Ruta para actualizar un departamento
 router.put('/updateDepartment', departamentosController.updateDepartment);
 
+// Ruta para buscar los departamentos
+router.get('/searchDepartment', departamentosController.searchDepartment);
+
 module.exports = router;

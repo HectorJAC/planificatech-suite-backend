@@ -9,12 +9,15 @@ router.post('/createNote', notasController.createNote);
 router.get('/getNotesByUser', notasController.getNotasByUser);
 
 // Ruta para modificar una nota
-//router.put('/updateNote', notasController.updateNota);
+router.put('/updateNote', notasController.updateNote);
 
 // Ruta para eliminar una nota
 router.delete('/deleteNote', notasController.deleteNote);
 
 // Ruta para obtener una nota
 router.get('/getNote', notasController.getNote);
+
+// Ruta para buscar una nota de un usuario por su titulo o descripcion
+router.get('/searchNote', notasController.searchNote);
 
 module.exports = router;
