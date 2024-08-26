@@ -59,6 +59,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE,
             allowNull: false,
         },
+        salario: {
+            type: DataTypes.BIGINT(19),
+            allowNull: false,
+        },
         id_departamento: {
             type: DataTypes.INTEGER(10),
             allowNull: false,
@@ -81,6 +85,22 @@ module.exports = (sequelize, DataTypes) => {
             references: {
                 model: 'empresas',
                 key: 'id_empresa'
+            }
+        },
+        id_usuario_creacion: {
+            type: DataTypes.INTEGER(10),
+            allowNull: false,
+            references: {
+                model: 'usuarios',
+                key: 'id_usuario'
+            }
+        },
+        id_usuario_actualizacion: {
+            type: DataTypes.INTEGER(10),
+            allowNull: true,
+            references: {
+                model: 'usuarios',
+                key: 'id_usuario'
             }
         },
         estado: {

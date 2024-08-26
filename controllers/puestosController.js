@@ -1,6 +1,24 @@
 const { Op } = require('sequelize');
 const puestos = require('../models');
 
+// Funcion para obtener la cantidad de empleados por puesto
+exports.getEmpleadosPorPuesto = async (req, res) => {
+    try {
+        const empleadosPorPuesto = await puestos.sequelize.query(
+            `SELECT 
+                puestos.nombre_puesto AS puesto,
+                COUNT(empleados.id_empleado) AS cantidad_empleados
+            FROM empleados
+            INNER JOIN puestos ON empleados.id_puesto = puestos.id_puesto
+            GROUP BY puestos.nombre_puesto`,
+            { type: puestos.sequelize.QueryTypes.SELECT }
+        );
+        return res.status(200).send(empleadosPorPuesto);
+    } catch (error) {
+        return res.status(500).send({ message: 'Error en el servidor', error: error });
+    }
+};
+
 // Funcion para obtener todos los puestos que esten activos
 exports.getPuestos = async (req, res) => {
     try {

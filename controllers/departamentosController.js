@@ -20,19 +20,44 @@ exports.getEmpleadosPorDepartamento = async (req, res) => {
 
 // Funcion para obtener todos los departamentos de una empresa
 exports.getDepartamentos = async (req, res) => {
+    const page = parseInt(req.query.page) || 1; // Página actual, por defecto 1
+    const limit = parseInt(req.query.limit) || 9; // Cantidad de resultados por página
+
     const { id_empresa } = req.query;
     try {
-        const departamentosEmpresa = await departamentos.sequelize.models.departamentos.findAll({
-            where: {
+        // Consulta para obtener la cantidad total de empleados
+        const totalDepartments = await departamentos.sequelize.models.departamentos.count({
+            where: {    
                 id_empresa: id_empresa,
                 estado: 'ACTIVO'
             }
         });
-        if (departamentosEmpresa.length > 0) {
-            return res.status(200).send(departamentosEmpresa);
-        } else {
-            return res.status(404).send({ message: 'No se encontraron departamentos' });
-        }
+
+        const totalPages = Math.ceil(totalDepartments / limit); // Calcular el total de páginas
+        const offset = (page - 1) * limit; // Calcular el desplazamiento
+
+        const departamentosEmpresa = await departamentos.sequelize.query(`
+            SELECT
+                d.*
+            FROM
+                departamentos d
+            WHERE
+                d.id_empresa = ${id_empresa} AND d.estado = 'ACTIVO'
+            LIMIT 
+                ${limit} OFFSET ${offset}`, 
+            { type: departamentos.sequelize.QueryTypes.SELECT } 
+            );
+            if (departamentosEmpresa.length === 0) {
+                return res.status(404).send({ message: 'No se encontraron departamentos' });
+            } else {
+                return res.status(200).json({
+                    totalDepartments: totalDepartments,
+                    totalPages: totalPages,
+                    currentPage: page,
+                    pageSize: limit,
+                    departments: departamentosEmpresa,
+                });
+            }
     } catch (error) {
         return res.status(500).send({ message: 'Error en el servidor', error: error });
     }
@@ -156,6 +181,52 @@ exports.updateDepartment = async (req, res) => {
             return res.status(200).send({ message: 'Departamento actualizado correctamente', departamento: departamentoActualizado});
         } else {
             return res.status(404).send({ message: 'Error actualizando el departamento'});
+        }
+    } catch (error) {
+        return res.status(500).send({ message: 'Error en el servidor', error: error });
+    }
+};
+
+// Funcion para buscar un departamento por su departamento, descripcion o gerente
+exports.searchDepartment = async (req, res) => {
+    const page = parseInt(req.query.page) || 1; // Página actual, por defecto 1
+    const limit = parseInt(req.query.limit) || 9; // Cantidad de resultados por página
+
+    const { id_empresa, search } = req.query;
+    try {
+        // Consulta para obtener la cantidad total de empleados
+        const totalDepartments = await departamentos.sequelize.models.departamentos.count({
+            where: {    
+                id_empresa: id_empresa,
+                estado: 'ACTIVO'
+            }
+        });
+
+        const totalPages = Math.ceil(totalDepartments / limit); // Calcular el total de páginas
+        const offset = (page - 1) * limit; // Calcular el desplazamiento
+
+        const departamentosEmpresa = await departamentos.sequelize.query(`
+            SELECT
+                d.*
+            FROM
+                departamentos d
+            WHERE
+                d.nombre_departamento LIKE '%${search}%' OR
+                d.descripcion_departamento LIKE '%${search}%'
+            LIMIT 
+                ${limit} OFFSET ${offset}`, 
+            { type: departamentos.sequelize.QueryTypes.SELECT } 
+        );
+        if (departamentosEmpresa.length === 0) {
+            return res.status(404).send({ message: 'No se encontraron departamentos' });
+        } else {
+            return res.status(200).json({
+                totalDepartments: totalDepartments,
+                totalPages: totalPages,
+                currentPage: page,
+                pageSize: limit,
+                departments: departamentosEmpresa,
+            });
         }
     } catch (error) {
         return res.status(500).send({ message: 'Error en el servidor', error: error });
