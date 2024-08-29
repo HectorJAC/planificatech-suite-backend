@@ -20,4 +20,7 @@ router.get('/getGerenteById', gerentesController.getGerenteById);
 // Ruta para buscar gerentes mediante cedula, nombres o apellidos
 router.get('/searchGerentes', gerentesController.searchGerentes);
 
+// Ruta para obtener todos los gerentes de una empresa sin paginacion
+router.get('/getAllManagersNoPagination', gerentesController.getAllManagersNoPagination);
+
 module.exports = router;

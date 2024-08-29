@@ -26,4 +26,7 @@ router.get('/getEmployeesByEntryDate', empleadosController.getEmployeesByEntryDa
 // Ruta para obtener la cantidad de empleados por salario
 router.get('/getEmployeesBySalary', empleadosController.getEmployeesBySalary);
 
+// Funcion para obtener todos los empleados de una empresa sin paginacion
+router.get('/getAllEmployeesNoPagination', empleadosController.getAllEmployeesNoPagination);
+
 module.exports = router;

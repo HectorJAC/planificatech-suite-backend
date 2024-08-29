@@ -1,6 +1,26 @@
 const empleados = require('../models');
 const departamentos = require('../models');
 
+// Funcion para obtener todos los empleados de una  misma empresa sin paginacion
+exports.getAllEmployeesNoPagination = async (req, res) => {
+    const { id_empresa } = req.query;
+    try {
+        const employees = await empleados.sequelize.models.empleados.findAll({
+            where: { 
+                id_empresa: id_empresa
+            }
+        });
+        if (employees.length === 0) {
+            return res.status(404).send({ message: 'No se encontraron empleados' });
+        } else {
+            return res.status(200).json(employees);
+        }
+    }
+    catch (error) {
+        return res.status(500).send({ message: 'Error en el servidor', error: error});
+    }
+};
+
 // Funcion para obtener todos los empleados de una misma empresa
 exports.getAllEmployees = async (req, res) => {
     const page = parseInt(req.query.page) || 1; // Página actual, por defecto 1
