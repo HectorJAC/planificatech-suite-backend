@@ -93,7 +93,7 @@ exports.updateDirectorGeneral = async (req, res) => {
         nivel_academico 
     } = req.body;
     try {
-        await director_general.sequelize.models.director_general.update({
+        const directorGeneralActualizado = await director_general.sequelize.models.director_general.update({
             id_usuario: id_usuario,
             nombres: nombres,
             apellidos: apellidos,
@@ -110,7 +110,7 @@ exports.updateDirectorGeneral = async (req, res) => {
                 id_director_general: id_director_general
             }
         });
-        return res.status(200).send({ message: 'Datos actualizados correctamente' });
+        return res.status(200).send({ message: 'Datos actualizados correctamente', directorGeneral: directorGeneralActualizado });
     } catch (error) {
         return res.status(500).send({ message: 'Error en el servidor', error: error });
     }

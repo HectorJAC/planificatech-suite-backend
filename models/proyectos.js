@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DATE,
             allowNull: true,
         },
-        presupuesto_asigando: {
+        presupuesto_asignado: {
             type: DataTypes.BIGINT(19),
             allowNull: true,
         },

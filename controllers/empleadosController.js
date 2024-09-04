@@ -25,10 +25,15 @@ exports.getAllEmployeesNoPagination = async (req, res) => {
 exports.getAllEmployees = async (req, res) => {
     const page = parseInt(req.query.page) || 1; // Página actual, por defecto 1
     const limit = parseInt(req.query.limit) || 4; // Cantidad de resultados por página, por defecto 4
-
+    const { id_empresa } = req.query;
+ 
     try {
         // Consulta para obtener la cantidad total de empleados
-        const totalEmployees = await empleados.sequelize.models.empleados.count();
+        const totalEmployees = await empleados.sequelize.models.empleados.count({
+            where: { 
+                id_empresa: id_empresa
+            }
+        });
 
         const totalPages = Math.ceil(totalEmployees / limit); // Calcular el total de páginas
         const offset = (page - 1) * limit; // Calcular el desplazamiento
@@ -48,7 +53,7 @@ exports.getAllEmployees = async (req, res) => {
             LEFT JOIN 
                 usuarios u_actualizacion ON e.id_usuario_actualizacion = u_actualizacion.id_usuario
             WHERE 
-                e.id_empresa = 1
+                e.id_empresa = ${id_empresa}
             ORDER BY
                 e.id_empleado
             LIMIT 
@@ -299,14 +304,14 @@ exports.getEmployeesByEntryDate = async (req, res) => {
     try {
         const employeesByEntryDate = await empleados.sequelize.query(`
             SELECT 
-                fecha_ingreso_empresa,
+                YEAR(fecha_ingreso_empresa) AS fecha_ingreso_empresa,
                 COUNT(*) AS cantidad_empleados
             FROM 
                 empleados
             WHERE 
                 id_empresa = ${id_empresa}
             GROUP BY
-                fecha_ingreso_empresa`, 
+                YEAR(fecha_ingreso_empresa)`, 
             { type: empleados.sequelize.QueryTypes.SELECT }
         );
         if (employeesByEntryDate.length === 0) {

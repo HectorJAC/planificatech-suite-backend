@@ -35,4 +35,34 @@ router.get('/getEmployeesByProject', proyectosController.getEmployeesByProject);
 // Ruta para obtener todos los departamentos de un proyecto
 router.get('/getDepartmentsByProject', proyectosController.getDepartmentsByProject);
 
+// Ruta para obtener todos los proyectos por estado_proyecto
+router.get('/getAllProjectsByStatus', proyectosController.getAllProjectsByStatus);
+
+// Ruta para buscar un proyecto por su id o nombre
+router.get('/searchProject', proyectosController.searchProject);
+
+// Ruta para obtener la cantidad de tareas por estado de todos los proyectos
+router.get('/getAllTasksByStatus', proyectosController.getAllTasksByStatus);
+
+// Ruta para actualizar un proyecto
+router.put('/updateProject', proyectosController.updateProject);
+
+// Ruta para crear un proyecto
+router.post('/createProject', proyectosController.createProject);
+
+// Ruta para obtener la cantidad de proyectos enviandole su estado_proyecto
+router.get('/getCantProjectsByStatus', proyectosController.getCantProjectsByStatus);
+
+// Ruta para agregar una tarea a la tabla tareas_proyectos
+router.post('/addTaskToProject', proyectosController.addTaskToProject);
+
+// Ruta para obtener los datos de una tarea de un proyecto
+router.get('/getTaskProjectById', proyectosController.getTaskProjectById);
+
+// Ruta para actualizar una tarea de un proyecto
+router.put('/updateTaskFromProject', proyectosController.updateTaskFromProject);
+
+// Ruta para eliminar una tarea de un proyecto
+router.put('/inactivateTaskFromProject', proyectosController.inactivateTaskFromProject);
+
 module.exports = router;
