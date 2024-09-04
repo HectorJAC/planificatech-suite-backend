@@ -49,6 +49,10 @@ app.use('/empleados', empleadosRoutes);
 const puestosRoutes = require('./routers/puestos.routes');
 app.use('/puestos', puestosRoutes);
 
+// Proyectos
+const proyectosRoutes = require('./routers/proyectos.routes');
+app.use('/proyectos', proyectosRoutes);
+
 db.sequelize.sync().then(() => {
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

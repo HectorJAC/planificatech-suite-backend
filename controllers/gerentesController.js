@@ -192,3 +192,23 @@ exports.searchGerentes = async (req, res) => {
         return res.status(500).send({ message: 'Error en el servidor', error: error });
     }
 };
+
+// Funcion para obtener todos los gerentes de una empresa sin paginacion
+exports.getAllManagersNoPagination = async (req, res) => {
+    const { id_empresa } = req.query;
+    try {
+        const managers = await gerentes.sequelize.models.gerentes.findAll({
+            where: {
+                id_empresa: id_empresa
+            }
+        });
+        if (managers.length === 0) {
+            return res.status(404).send({ message: 'No se encontraron gerentes' });
+        } else {
+            return res.status(200).send(managers);
+        }
+    }
+    catch (error) {
+        return res.status(500).send({ message: 'Error en el servidor', error: error });
+    }
+};
