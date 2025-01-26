@@ -22,14 +22,6 @@ module.exports = (sequelize, DataTypes) => {
                 key: 'id_proyecto'
             }
         },
-        id_gerente: {
-            type: DataTypes.INTEGER(10),
-            allowNull: false,
-            references: {
-                model: 'gerentes',
-                key: 'id_gerente'
-            }
-        },
         estado: {
             type: DataTypes.STRING(120),
             allowNull: false,

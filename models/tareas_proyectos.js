@@ -1,6 +1,6 @@
 module.exports = (sequelize, DataTypes) => {
     const tareas_proyectos = sequelize.define('tareas_proyectos', {
-        id_tarea_plan: {
+        id_tarea_proyecto: {
             type: DataTypes.INTEGER(10),
             primaryKey: true,
             autoIncrement: true,
@@ -14,13 +14,13 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(255),
             allowNull: false,
         },
-        fecha_inicio: {
+        fecha_inicio_tarea_proyecto: {
             type: DataTypes.DATE,
             allowNull: false,
         },
-        fecha_fin: {
+        fecha_fin_tarea_proyecto: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
         },
         id_proyecto: {
             type: DataTypes.INTEGER(10),

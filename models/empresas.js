@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         logo_empresa: {
-            type: DataTypes.STRING(255),
+            type: DataTypes.TEXT('long'),
             allowNull: true,
             defaultValue: null
         },

@@ -20,10 +20,22 @@ module.exports = (sequelize, DataTypes) => {
         },
         fecha_fin: {
             type: DataTypes.DATE,
-            allowNull: false,
+            allowNull: true,
         },
-        presupuesto_asigando: {
+        presupuesto_asignado: {
             type: DataTypes.BIGINT(19),
+            allowNull: true,
+        },
+        id_gerente: {
+            type: DataTypes.INTEGER(10),
+            allowNull: false,
+            references: {
+                model: 'gerentes',
+                key: 'id_gerente'
+            }
+        },
+        tipo_proyecto: {
+            type: DataTypes.INTEGER(10),
             allowNull: false,
         },
         id_empresa: {
